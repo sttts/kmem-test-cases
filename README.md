@@ -4,7 +4,7 @@ With Docker 1.11+ do this:
 
 ```shell
 $ docker build -t msg .
-$ docker run -it --kernel-memory=100M --memory=100M --rm --name msg msg \
+$ docker run -it --sysctl=kernel.msgmni=32768 --kernel-memory=100M --memory=100M --rm --name msg msg \
     /bin/bash -c "python /msg.py; cat /sys/fs/cgroup/memory/memory.kmem.usage_in_bytes; tail -f /dev/null"
 ```
 
