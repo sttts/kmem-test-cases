@@ -25,4 +25,4 @@ Message queue 5961
 
 ## Kernel >= 4.5
 
-With later kernels accontings was turned into opt-in (compare https://github.com/torvalds/linux/commit/a9bb7e620efdfd29b6d1c238041173e411670996) such that there is no kmem accounting for ipc message queues anymore and the upper example just works.
+With later kernels kmem acconting was turned into opt-in (compare https://github.com/torvalds/linux/commit/a9bb7e620efdfd29b6d1c238041173e411670996) such that there is no kmem accounting for ipc message queues anymore and the upper example just works.
