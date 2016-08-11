@@ -29,13 +29,21 @@ func main() {
 		go func(i int) {
 			defer wg.Done()
 			c <- fmt.Sprintf("dialing #%d", i)
-			_, err := net.DialTCP("tcp", nil, tcpAddr)
+			conn, err := net.DialTCP("tcp", nil, tcpAddr)
 			if err != nil {
 				c <- fmt.Sprintf("dial failed #%d: %v", i, err)
 				return
 			}
 			atomic.AddInt64(&conns, 1)
 			c <- fmt.Sprintf("accepted #%d, %d connected", i, atomic.LoadInt64(&conns))
+
+			bs := make([]byte, 200000)
+            		n, err := conn.Write(bs)
+			if err != nil {
+				c <- fmt.Sprintf("send failed #%d: %v", i, err)
+				conn.Close()
+			}
+			c <- fmt.Sprintf("sent %d bytes #%d", n, i)
 
 			<- make(chan struct{})
 		}(i)
