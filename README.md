@@ -1,4 +1,6 @@
-# System V Message Queue example of missing kmem accounting
+# Kernel Memory Accounting Test Case
+
+## System V Message Queue example of missing kmem accounting
 
 With Docker 1.11+ do this:
 
@@ -10,7 +12,7 @@ $ docker run -it --sysctl=kernel.msgmni=32768 --kernel-memory=100M --memory=100M
 
 Because the created message queues need 512 MB of kernel memory, this command should never finish. 
 
-## Kernels < 4.5
+### Kernels < 4.5
 
 The command actually terminates early:
 
